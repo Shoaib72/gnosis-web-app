@@ -8,14 +8,21 @@ import Login from "../../Components/Login/Login";
 import Register from "../../Components/Register/Register";
 import Main from "../../Layout/Main";
 import Home from './../../Components/Home/Home';
+import ErrorPage from "../../Components/ErrorPage/ErrorPage";
 
 export const routes = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
+                element: <Home></Home>,
+                loader: () => fetch('https://gnosis-web-app-server.vercel.app/courses')
+            },
+            {
+                path: '/home',
                 element: <Home></Home>,
                 loader: () => fetch('https://gnosis-web-app-server.vercel.app/courses')
             },
