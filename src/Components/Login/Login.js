@@ -2,23 +2,27 @@
 import React, { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import app from '../Firebase/firebase.config';
 import { useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
 
 
 const Login = () => {
     const provider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [validated, setValidated] = useState(false);
     const formRef = useRef(null);
+    const navigate = useNavigate();
     const auth = getAuth(app);
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const { setUser, setLoading } = useContext(AuthContext)
     const handleEmail = (e) => {
         setEmail(e.target.value);
@@ -34,8 +38,9 @@ const Login = () => {
         }
         setError("");
         setPassword(e.target.value);
-    }
+    };
     const handleGoogleLogin = () => {
+        setLoading(true);
         signInWithPopup(auth, provider)
             .then((result) => {
 
@@ -45,18 +50,19 @@ const Login = () => {
                 const user = result.user;
                 setUser(user);
                 setError("");
+                navigate(from, { replace: true });
             })
             .catch((error) => {
 
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 setError(errorMessage);
-                const email = error.customData.email;
-                const credential = GoogleAuthProvider.credentialFromError(error);
+
 
             });
-    }
+    };
     const handleLogIn = () => {
+        setLoading(true)
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
@@ -66,6 +72,7 @@ const Login = () => {
                 setValidated(true);
                 handleReset();
                 setError("");
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -73,6 +80,21 @@ const Login = () => {
                 setError(errorMessage)
             })
 
+    };
+    const handleGithubLogin = () => {
+        setLoading(true)
+        signInWithPopup(auth, githubProvider)
+            .then((result) => {
+                const user = result.user;
+                setUser(user);
+                setError("");
+                navigate(from, { replace: true });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage);
+            });
     }
 
     return (
@@ -89,7 +111,7 @@ const Login = () => {
                     Log In
                 </Button>
                 <div className='mt-3'>
-                    <Button className="ms-3 mb-1" variant="primary" type="submit">
+                    <Button onClick={handleGithubLogin} className="ms-3 mb-1" variant="primary" type="submit">
                         Log In With Github
                     </Button>
                     <Button onClick={handleGoogleLogin} className="ms-3" variant="primary" type="submit">

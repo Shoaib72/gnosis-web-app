@@ -9,6 +9,7 @@ import Register from "../../Components/Register/Register";
 import Main from "../../Layout/Main";
 import Home from './../../Components/Home/Home';
 import ErrorPage from "../../Components/ErrorPage/ErrorPage";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const routes = createBrowserRouter([
     {
@@ -38,7 +39,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/checkout/:id',
-                element: <CheckOut></CheckOut>,
+                element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
                 loader: ({ params }) => fetch(`https://gnosis-web-app-server.vercel.app/checkout/${params.id}`)
             },
             {

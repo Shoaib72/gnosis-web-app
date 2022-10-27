@@ -2,8 +2,8 @@ import React from 'react';
 import { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import app from './../Firebase/firebase.config'
 import { useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
@@ -14,16 +14,19 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
     const [validated, setValidated] = useState(false);
     const auth = getAuth(app);
-    const { setUser } = useContext(AuthContext)
+    const { setUser, setLoading } = useContext(AuthContext)
     const formRef = useRef(null);
+    const navigate = useNavigate();
     const handleName = (e) => {
         setName(e.target.value);
     }
     const handleEmail = (e) => {
         setEmail(e.target.value);
-    }
+    };
+
     const handlePassword = (e) => {
         if (!/(?=.{8,})/.test(e.target.value)) {
             setError('Password must be 8 characters long!')
@@ -31,7 +34,8 @@ const Register = () => {
         }
         setError("");
         setPassword(e.target.value);
-    }
+    };
+
     const handleReset = () => {
         formRef.current.reset();
         setValidated(false);
@@ -39,6 +43,7 @@ const Register = () => {
     const handleRegistration = (e) => {
 
         e.preventDefault()
+        setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
@@ -48,6 +53,7 @@ const Register = () => {
                 setError("");
                 setValidated(true);
                 handleReset();
+                navigate('/')
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -61,6 +67,9 @@ const Register = () => {
             <Form.Group className="mb-3" controlId="formBasicName">
 
                 <Form.Control onBlur={handleName} type="name" placeholder="Enter your full name" required />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Control name="photoURL" type="text" placeholder="Photo URL/optional" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
 
