@@ -3,14 +3,16 @@ import React, { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import app from '../Firebase/firebase.config';
 import { useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
+import { GoogleAuthProvider } from "firebase/auth";
 
 
 
 const Login = () => {
+    const provider = new GoogleAuthProvider();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -32,6 +34,27 @@ const Login = () => {
         }
         setError("");
         setPassword(e.target.value);
+    }
+    const handleGoogleLogin = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+
+                const user = result.user;
+                setUser(user);
+                setError("");
+            })
+            .catch((error) => {
+
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage);
+                const email = error.customData.email;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+
+            });
     }
     const handleLogIn = () => {
         signInWithEmailAndPassword(auth, email, password)
@@ -69,7 +92,7 @@ const Login = () => {
                     <Button className="ms-3 mb-1" variant="primary" type="submit">
                         Log In With Github
                     </Button>
-                    <Button className="ms-3" variant="primary" type="submit">
+                    <Button onClick={handleGoogleLogin} className="ms-3" variant="primary" type="submit">
                         Log In With Google
                     </Button>
                 </div>

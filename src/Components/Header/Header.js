@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -43,8 +43,10 @@ const Header = () => {
                             {
                                 user?.uid ?
                                     <>
-                                        <span>{user?.displayName}</span>
-                                        <Button variant="primary" onClick={handleLogOut}>Log out</Button>
+                                        <Image className='me-2 mt-1' style={{ height: '35px', width: '35px' }}
+                                            roundedCircle
+                                            src={user?.photoURL}></Image>
+                                        <Button className='fw-bold text-white' variant="info" onClick={handleLogOut}>Log out</Button>
 
                                     </>
                                     :
