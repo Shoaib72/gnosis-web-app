@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 const CourseCard = ({ course }) => {
     const { name, id, motto, img } = course;
@@ -13,7 +14,7 @@ const CourseCard = ({ course }) => {
                     <Card.Text>
                         <span className='fw-bold'>Our Motto:</span> {motto}
                     </Card.Text>
-                    <Button variant="primary">See Details</Button>
+                    <Button variant="primary"><Link className='text-decoration-none text-white' to={`/course/${id}`}>See Details</Link></Button>
                 </Card.Body>
             </Card>
         </div>
