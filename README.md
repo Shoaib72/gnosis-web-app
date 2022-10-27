@@ -19,4 +19,5 @@
 #### Mobile Responsive
 #### Dynamic Routing with Private Route
 #### Backened Server Added for data
-#### Sign in with third party app integrated (Github)
+#### Sign in with third party app integrated (Github, Google)
+#### PDF document download option

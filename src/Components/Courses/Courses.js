@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+
 import { useLoaderData } from 'react-router-dom';
 import CourseCard from '../CourseCard/CourseCard';
 import CourseSection from '../CourseSection/CourseSection';
@@ -10,7 +10,7 @@ const Courses = () => {
     const courses = useLoaderData();
 
     return (
-        <div className='container me-lg-5'>
+        <div className='container me-lg-5 mt-5'>
             <div className="clearfix d-lg-flex">
                 <div className='w-70 sticky-lg-top'>
                     {

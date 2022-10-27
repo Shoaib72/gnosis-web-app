@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import ToggleButton from '../ToggleButton/ToggleButton';
 import img from './../Assets/icon.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -20,6 +18,7 @@ const Header = () => {
             .then(() => { })
             .catch(error => console.error(error))
     }
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="info" variant="light" className='mb-4'>
             <Container>
@@ -30,7 +29,7 @@ const Header = () => {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="me-auto mt-2">
+                    <Nav className="me-auto mt-2 fw-bold">
                         <Link className='text-decoration-none text-white ms-3' to="/home">Home</Link>
                         <Link className='text-decoration-none text-white ms-3' to="/courses">Courses</Link>
                         <Link className='text-decoration-none text-white ms-3' to="/blog">Blog</Link>
