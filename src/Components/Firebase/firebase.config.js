@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBQIXXdv4ZtUhWKea3AalD9DwqXS5fGRMw",
-    authDomain: "gnosis-web-app.firebaseapp.com",
-    projectId: "gnosis-web-app",
-    storageBucket: "gnosis-web-app.appspot.com",
-    messagingSenderId: "913268988708",
-    appId: "1:913268988708:web:9257ffe2e60f49e784f1b1"
+    apiKey: process.env.REACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket: process.env.REACT_APP_storageBucket,
+    messagingSenderId: process.env.REACT_APP_messagingSenderId,
+    appId: process.env.REACT_APP_appId,
 };
 
 // Initialize Firebase

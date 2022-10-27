@@ -8,6 +8,7 @@ const CheckOut = () => {
         <div>
             <h1>{course_name}</h1>
             <img style={{ height: '400px', width: '400px' }} src={thumbnail} alt="" />
+            <p>If you are interested in this course, mail us at : <span className='text-danger mt-5'>shoaib.953872@gmail.com</span></p>
         </div>
     );
 };

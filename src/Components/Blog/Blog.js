@@ -5,6 +5,7 @@ import Accordion from 'react-bootstrap/Accordion';
 const Blog = () => {
     return (
         <Container>
+            <h2 className='mb-5 mt-5'>Blog Section<span className='ms-2 text-danger'>QnA</span></h2>
             <Accordion>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>what is cors?</Accordion.Header>

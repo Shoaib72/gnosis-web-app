@@ -17,7 +17,7 @@ const CourseDetails = () => {
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
         documentTitle: 'emp-data',
-        onAfterPrint: () => alert('Print Successfull')
+
     })
     console.log(Description)
     return (
@@ -30,7 +30,7 @@ const CourseDetails = () => {
                 <Button onClick={handlePrint} variant="dark"><FontAwesomeIcon style={{ height: '30px', width: '30px' }} icon={faFilePdf}>
                 </FontAwesomeIcon></Button>
             </div>
-            <Card style={{ width: '50%' }}>
+            <Card className='mx-auto' style={{ width: '70%' }}>
                 <Card.Img variant="top" src={image_url} />
                 <Card.Body>
                     <Card.Title>{header}</Card.Title>
