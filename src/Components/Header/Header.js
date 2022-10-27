@@ -28,6 +28,7 @@ const Header = () => {
                     </Nav>
                     <Nav>
                         <Link className='text-white text-decoration-none ms-3' to="/login">Login</Link>
+                        <Link className='text-white text-decoration-none ms-3' to="/login">Login</Link>
 
                     </Nav>
 
