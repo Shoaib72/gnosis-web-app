@@ -1,6 +1,6 @@
 # Gnosis Web App
 
-## Live Site Link:
+## Live Site Link: https://gnosis-web-app.web.app
 
 
 ###   Dependencies
