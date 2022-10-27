@@ -58,7 +58,7 @@ const Register = () => {
     return (
         <Form ref={formRef} validated={validated} className='mx-5 border p-5 bg-info mt-5 rounded'>
             <p className='text-danger fw-bold'>{error}</p>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="formBasicName">
 
                 <Form.Control onBlur={handleName} type="name" placeholder="Enter your full name" required />
             </Form.Group>

@@ -39,18 +39,17 @@ const Login = () => {
                 // Signed in 
                 const user = userCredential.user;
                 setUser(user);
-                setError("");
+
                 setValidated(true);
                 handleReset();
+                setError("");
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 setError(errorMessage)
             })
-            .finally(() => {
-                setLoading(false);
-            })
+
     }
 
     return (

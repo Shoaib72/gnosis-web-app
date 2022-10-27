@@ -44,11 +44,12 @@ const Header = () => {
                                 user?.uid ?
                                     <>
                                         <span>{user?.displayName}</span>
-                                        <Button variant="light" onClick={handleLogOut}>Log out</Button>
+                                        <Button variant="primary" onClick={handleLogOut}>Log out</Button>
+
                                     </>
                                     :
                                     <>
-                                        <Link className='text-white text-decoration-none' to='/login'>Login</Link>
+                                        <Link className='text-white text-decoration-none fw-bold' to='/login'>Login</Link>
                                     </>
                             }
 
