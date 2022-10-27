@@ -22,7 +22,7 @@ const CourseDetails = () => {
     console.log(Description)
     return (
         <Container>
-            <div className='d-none' ref={componentRef} style={{ width: '100%', height: window.innerHeight }}>
+            <div className='d-none' style={{ width: '100%', height: window.innerHeight }}>
                 <h1>This is Everything</h1>
             </div>
             <div className='d-flex justify-content-center align-items-center'>
@@ -30,7 +30,7 @@ const CourseDetails = () => {
                 <Button onClick={handlePrint} variant="dark"><FontAwesomeIcon style={{ height: '30px', width: '30px' }} icon={faFilePdf}>
                 </FontAwesomeIcon></Button>
             </div>
-            <Card className='mx-auto' style={{ width: '70%' }}>
+            <Card ref={componentRef} className='mx-auto' style={{ width: '70%' }}>
                 <Card.Img variant="top" src={image_url} />
                 <Card.Body>
                     <Card.Title>{header}</Card.Title>
