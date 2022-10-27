@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
+import elon from './../Assets/elon.jpg';
 
 const Blog = () => {
     return (
@@ -32,6 +33,11 @@ const Blog = () => {
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
+            <Container>
+                <img className='rounded' style={{ height: '300px', width: '400px', marginTop: '40px' }} src={elon} alt="" />
+                <p className='mt-5'>"Failure is an option here. If things are not failing, you are not innovating enough."</p>
+                <p className='fw-bold'>-Elon Musk</p>
+            </Container>
         </Container>
     );
 };
