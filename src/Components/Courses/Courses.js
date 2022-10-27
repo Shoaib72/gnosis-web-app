@@ -1,20 +1,29 @@
 import React from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import CourseCard from '../CourseCard/CourseCard';
+import CourseSection from '../CourseSection/CourseSection';
+
+
 
 const Courses = () => {
     const courses = useLoaderData();
+
     return (
-        <div>
-            <Container>
-                <Row>
-                    <Col>1 of 3</Col>
-                    <Col>2 of 3</Col>
-                    <Col>3 of 3</Col>
-                </Row>
-            </Container>
+        <div className='container me-lg-5'>
+            <div className="clearfix d-lg-flex">
+                <div className='w-70 sticky-lg-top'>
+                    {
+                        courses.map(course => <CourseSection key={course.id} course={course}></CourseSection>)
+                    }
+                </div>
+                <div className='w-80 float-right ms-lg-5'>
+                    {
+                        courses.map(course => <CourseCard key={course.id} course={course}></CourseCard>)
+                    }
+                </div>
+            </div>
+
         </div>
     );
 };
