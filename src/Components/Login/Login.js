@@ -17,7 +17,7 @@ const Login = () => {
     const [validated, setValidated] = useState(false);
     const formRef = useRef(null);
     const auth = getAuth(app);
-    const { setUser } = useContext(AuthContext)
+    const { setUser, setLoading } = useContext(AuthContext)
     const handleEmail = (e) => {
         setEmail(e.target.value);
     }
@@ -47,7 +47,10 @@ const Login = () => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 setError(errorMessage)
-            });
+            })
+            .finally(() => {
+                setLoading(false);
+            })
     }
 
     return (
@@ -59,12 +62,12 @@ const Login = () => {
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control onBlur={handlePassword} type="password" placeholder="Password" required />
             </Form.Group>
-            <div className='d-flex flex-column'>
+            <div className='d-flex flex-column gap-3'>
                 <Button onClick={handleLogIn} className='mx-auto' variant="primary" type="submit">
                     Log In
                 </Button>
                 <div className='mt-3'>
-                    <Button className="ms-3" variant="primary" type="submit">
+                    <Button className="ms-3 mb-1" variant="primary" type="submit">
                         Log In With Github
                     </Button>
                     <Button className="ms-3" variant="primary" type="submit">

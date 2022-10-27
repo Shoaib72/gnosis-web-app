@@ -1,13 +1,25 @@
 import React from 'react';
+import { useContext } from 'react';
+import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import ToggleButton from '../ToggleButton/ToggleButton';
-import img from './../Assets/icon.png'
+import img from './../Assets/icon.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+
 
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
     return (
         <Navbar collapseOnSelect expand="lg" bg="info" variant="light" className='mb-4'>
             <Container>
@@ -27,8 +39,21 @@ const Header = () => {
 
                     </Nav>
                     <Nav>
-                        <Link className='text-white text-decoration-none ms-3' to="/login">Login</Link>
-                        <Link className='text-white text-decoration-none ms-3' to="/login">Login</Link>
+                        <>
+                            {
+                                user?.uid ?
+                                    <>
+                                        <span>{user?.displayName}</span>
+                                        <Button variant="light" onClick={handleLogOut}>Log out</Button>
+                                    </>
+                                    :
+                                    <>
+                                        <Link className='text-white text-decoration-none' to='/login'>Login</Link>
+                                    </>
+                            }
+
+
+                        </>
 
                     </Nav>
 
